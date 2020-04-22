@@ -28,22 +28,24 @@ characterAmountRange.addEventListener("input", syncCharacterAmount);
 form.addEventListener("submit", e => {
   e.preventDefault()
   var characterAmount = characterAmountNumber.value
-  var includeUppercase = includeUppercaseElement.checked
-  var includeLowercase = includeUppercaseElement.checked
-  var includeNumbers = includeUppercaseElement.checked
-  var includeSymbols = includeUppercaseElement.checked
-  var password = generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols)
+  var includeUppercase =document.querySelector("#includeUppercase").checked
+  // var includeLowercase = document.querySelector("#includeLowercase").checked
+  var includeNumbers = document.querySelector("#includeNumbers").checked
+  var includeSymbols = document.querySelector("#includeSymbols").checked
+  generatePassword(characterAmount, includeUppercase,  includeNumbers, includeSymbols)
   //** 
-  passwordDisplay.addEventListener=("password")
+
 
 })
 //Overall list of all charCodes --loop through to randomly choose one 
-function generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols) {
+function generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols) {
   //Default to LoweCase_Char_Codes
   var charCodes = LowerCase_Char_Codes
   if (includeUppercase) charCodes = charCodes.concat(UpperCase_Char_Codes)
   if (includeSymbols) charCodes = charCodes.concat(Symbol_Char_Codes)
   if (includeNumbers) charCodes = charCodes.concat(Number_Char_Codes)
+  
+  
 
   var passwordCharacters = []
   for (var i = 0; i < characterAmount; i++) {
@@ -54,11 +56,15 @@ function generatePassword(characterAmount, includeUppercase, includeLowercase, i
       passwordCharacters.push(String.fromCharCode(characterCode))
 
   }
-  return passwordCharacters.join("")
+  console.log(passwordCharacters);
+  
+  //return passwordCharacters.join("")
+  passwordDisplay.innerHTML=passwordCharacters.join("")
 
 
 
 }
+
 //CONSOLE LOG CHECK 
 console.log(Number_Char_Codes)
 
